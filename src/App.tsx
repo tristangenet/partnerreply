@@ -96,8 +96,8 @@ ${message}`;
       const newHistory = [newItem, ...history].slice(0, 10);
       setHistory(newHistory);
       localStorage.setItem("partnerreply_history", JSON.stringify(newHistory));
-    } catch (e: any) {
-      setError(e.message || "Erreur OpenAI");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Erreur OpenAI");
     }
     setLoading(false);
   };
