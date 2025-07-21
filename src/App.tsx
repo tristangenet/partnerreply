@@ -81,8 +81,9 @@ ${message}${htmlPart}${cssPart}`;
     setNature(n);
 
     try {
-      if (!apiKey) throw new Error("Aucune clé API OpenAI définie.");
-      const openai = getOpenAI(apiKey);
+      const finalApiKey = apiKey || import.meta.env.VITE_OPENAI_API_KEY || "";
+      if (!finalApiKey) throw new Error("Aucune clé API OpenAI définie.");
+      const openai = getOpenAI(finalApiKey);
 
       const userContent: ChatCompletionContentPart[] = [
         { type: "text", text: buildPrompt(message, n, htmlCode, cssjsCode) },

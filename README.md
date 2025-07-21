@@ -20,6 +20,10 @@ Features:
    npm run dev
    ```
 3. When the app is running, enter your OpenAI API key in the field at the top of the page. The key is stored locally in `localStorage` under `openai_api_key`.
+   If no key is found in `localStorage`, the application will also look for
+   an environment variable named `VITE_OPENAI_API_KEY` provided at build time
+   (for example in a `.env` file). This allows deployments to supply the key
+   automatically without user input.
 
 ## Building for production
 
