@@ -25,3 +25,37 @@ a { color: #2980f1; text-decoration: none;}
 @media (max-width: 600px) {
   .card { padding: 1rem 0.5rem; }
 }
+
+.loader {
+  border: 3px solid #e2e8f0;
+  border-top-color: #2980f1;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+body.dark {
+  background: #1a202c;
+  color: #f4f7fb;
+}
+
+body.dark a { color: #63b3ed; }
+
+body.dark textarea,
+body.dark input {
+  background: #1f2937;
+  color: #f4f7fb;
+  border-color: #374151;
+}
+
+body.dark .card {
+  background: #171923;
+  color: #f4f7fb;
+  border-color: #22253b;
+}

@@ -15,13 +15,22 @@ export interface HistoryItem {
 export default function HistoryPanel({
   history,
   onRestore,
+  onClear,
 }: {
   history: HistoryItem[];
   onRestore: (item: HistoryItem) => void;
+  onClear: () => void;
 }) {
   return (
     <div className="w-full max-w-2xl mb-10">
-      <div className="font-bold text-lg mb-2 text-gray-700">Historique récent</div>
+      <div className="flex items-center justify-between mb-2">
+        <div className="font-bold text-lg text-gray-700">Historique récent</div>
+        {history.length > 0 && (
+          <button onClick={onClear} className="text-xs border px-2 py-1 rounded">
+            Vider
+          </button>
+        )}
+      </div>
       {history.length === 0 && <div className="text-gray-400 text-sm">Aucune réponse enregistrée.</div>}
       <div className="flex flex-col gap-3">
         {history.map(item => (
