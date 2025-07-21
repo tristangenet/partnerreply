@@ -38,7 +38,7 @@ export default function HistoryPanel({
                 Réutiliser
               </button>
             </div>
-            <div className="text-xs mb-1 text-gray-500">Message partenaire :</div>
+            <div className="text-xs mb-1 text-gray-500">Message partenaire :</div>
             <div className="bg-gray-100 p-2 rounded text-xs mb-2">{item.message}</div>
             <div className="flex gap-2">
               <CopyButton value={item.response} />
