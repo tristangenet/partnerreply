@@ -2,6 +2,13 @@
 
 PartnerReply is a small React + TypeScript application that assists WiziShop support agents in crafting replies. It analyzes a partner's message with OpenAI, classifies the request and produces a concise answer, including any code snippets to copy.
 
+Features:
+
+- Optional fields to provide HTML, CSS/JS code or an image screenshot.
+- Animated loader while OpenAI generates the answer.
+- Dark and light mode toggle.
+- Recent history of generated replies with ability to clear it.
+
 ## Setup
 
 1. Install dependencies:

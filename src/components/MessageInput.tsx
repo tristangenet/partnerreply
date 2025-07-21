@@ -1,11 +1,21 @@
 export default function MessageInput({
   value,
   onChange,
+  html,
+  onChangeHtml,
+  cssjs,
+  onChangeCssjs,
+  onFile,
   onGenerate,
   loading,
 }: {
   value: string;
   onChange: (v: string) => void;
+  html: string;
+  onChangeHtml: (v: string) => void;
+  cssjs: string;
+  onChangeCssjs: (v: string) => void;
+  onFile: (file: File | null) => void;
   onGenerate: () => void;
   loading: boolean;
 }) {
@@ -19,12 +29,38 @@ export default function MessageInput({
         className="border rounded-lg p-3 font-mono text-base"
         disabled={loading}
       />
+      <textarea
+        value={html}
+        onChange={e => onChangeHtml(e.target.value)}
+        placeholder="Code HTML (optionnel)"
+        rows={3}
+        className="border rounded-lg p-2 font-mono text-sm"
+        disabled={loading}
+      />
+      <textarea
+        value={cssjs}
+        onChange={e => onChangeCssjs(e.target.value)}
+        placeholder="Code CSS/JS (optionnel)"
+        rows={3}
+        className="border rounded-lg p-2 font-mono text-sm"
+        disabled={loading}
+      />
+      <input
+        type="file"
+        accept="image/*"
+        onChange={e => onFile(e.target.files ? e.target.files[0] : null)}
+        disabled={loading}
+      />
       <button
         onClick={onGenerate}
         disabled={!value || loading}
-        className="bg-black text-white px-6 py-2 rounded-lg font-bold hover:bg-gray-900 transition"
+        className="bg-black text-white px-6 py-2 rounded-lg font-bold hover:bg-gray-900 transition flex items-center justify-center"
       >
-        {loading ? "Génération en cours…" : "Analyser & Générer"}
+        {loading ? (
+          <span className="flex items-center gap-2"><span className="loader" />Génération…</span>
+        ) : (
+          "Analyser & Générer"
+        )}
       </button>
     </div>
   );
