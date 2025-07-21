@@ -13,6 +13,7 @@ import type { Nature } from "./utils/analyzeNature";
 import type { CodeBlock } from "./utils/extractCodeBlocks";
 import type { HistoryItem } from "./components/HistoryPanel";
 import { v4 as uuidv4 } from "uuid";
+import type { ChatCompletionContentPart } from "openai/resources/chat/completions";
 
 export default function App() {
   const [apiKey, setApiKey] = useState<string>(localStorage.getItem("openai_api_key") || "");
@@ -83,7 +84,7 @@ ${message}${htmlPart}${cssPart}`;
       if (!apiKey) throw new Error("Aucune clé API OpenAI définie.");
       const openai = getOpenAI(apiKey);
 
-      const userContent: any[] = [
+      const userContent: ChatCompletionContentPart[] = [
         { type: "text", text: buildPrompt(message, n, htmlCode, cssjsCode) },
       ];
       if (screenshot) {
