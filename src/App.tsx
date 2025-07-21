@@ -148,41 +148,41 @@ ${message}${htmlPart}${cssPart}`;
   }
 
   return (
-    <div
-      className={`min-h-screen flex flex-col items-center p-4 sm:p-6 ${dark ? 'bg-[#1a202c]' : 'bg-[#f8fafc]'}`}
-    >
+    <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 relative z-10">
       <h1 className="text-3xl font-bold mb-6 tracking-tight">PartnerReply</h1>
-      <ApiKeyInput onChange={setApiKey} />
-      <OptionsBar
-        dark={dark}
-        toggleDark={() => setDark(d => !d)}
-        onReset={resetFields}
-        onClear={clearHistory}
-        loading={loading}
-      />
-      <MessageInput
-        value={message}
-        onChange={setMessage}
-        html={htmlCode}
-        onChangeHtml={setHtmlCode}
-        cssjs={cssjsCode}
-        onChangeCssjs={setCssjsCode}
-        onFile={file => {
-          if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => setScreenshot(reader.result as string);
-            reader.readAsDataURL(file);
-          } else {
-            setScreenshot(null);
-          }
-        }}
-        onGenerate={generateResponse}
-        loading={loading}
-      />
-      {nature && <TagNature nature={nature} />}
-      {error && (
-        <div className="text-red-600 font-bold mt-2">{error}</div>
-      )}
+      <div className={`card${dark ? ' dark' : ''}`}>
+        <ApiKeyInput onChange={setApiKey} />
+        <OptionsBar
+          dark={dark}
+          toggleDark={() => setDark(d => !d)}
+          onReset={resetFields}
+          onClear={clearHistory}
+          loading={loading}
+        />
+        <MessageInput
+          value={message}
+          onChange={setMessage}
+          html={htmlCode}
+          onChangeHtml={setHtmlCode}
+          cssjs={cssjsCode}
+          onChangeCssjs={setCssjsCode}
+          onFile={file => {
+            if (file) {
+              const reader = new FileReader();
+              reader.onloadend = () => setScreenshot(reader.result as string);
+              reader.readAsDataURL(file);
+            } else {
+              setScreenshot(null);
+            }
+          }}
+          onGenerate={generateResponse}
+          loading={loading}
+        />
+        {nature && <TagNature nature={nature} />}
+        {error && (
+          <div className="text-red-500 font-bold mt-2">{error}</div>
+        )}
+      </div>
       {response && (
         <div className={`card${dark ? ' dark' : ''}`}>
           {/* Affiche la réponse texte sans les blocs code */}
@@ -195,7 +195,7 @@ ${message}${htmlPart}${cssPart}`;
           {/* Affiche les blocs code extraits */}
           {codeBlocks.length > 0 && (
             <div className="mt-4">
-              <div className="text-xs text-gray-500 font-semibold mb-1">
+              <div className="text-xs font-semibold mb-1" style={{ opacity: 0.7 }}>
                 Bloc{codeBlocks.length > 1 ? "s" : ""} code à copier :
               </div>
               {codeBlocks.map((block, idx) => (

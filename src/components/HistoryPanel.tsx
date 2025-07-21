@@ -26,12 +26,12 @@ export default function HistoryPanel({
       <div className="flex items-center justify-between mb-2">
         <div className="font-bold text-lg text-gray-700">Historique récent</div>
         {history.length > 0 && (
-          <button onClick={onClear} className="text-xs border px-2 py-1 rounded">
+          <button onClick={onClear} className="primary text-xs">
             Vider
           </button>
         )}
       </div>
-      {history.length === 0 && <div className="text-gray-400 text-sm">Aucune réponse enregistrée.</div>}
+      {history.length === 0 && <div className="text-sm" style={{ opacity: 0.7 }}>Aucune réponse enregistrée.</div>}
       <div className="flex flex-col gap-3">
         {history.map(item => (
           <div className="card" key={item.id} style={{ marginBottom: 8 }}>
@@ -42,16 +42,16 @@ export default function HistoryPanel({
               </span>
               <button
                 onClick={() => onRestore(item)}
-                className="px-2 py-1 rounded border bg-gray-100 text-xs hover:bg-gray-200 font-semibold"
+                className="primary text-xs"
               >
                 Réutiliser
               </button>
             </div>
-            <div className="text-xs mb-1 text-gray-500">Message partenaire :</div>
-            <div className="bg-gray-100 p-2 rounded text-xs mb-2">{item.message}</div>
+            <div className="text-xs mb-1" style={{ opacity: 0.7 }}>Message partenaire :</div>
+            <div className="history-message mb-2">{item.message}</div>
             <div className="flex gap-2">
               <CopyButton value={item.response} />
-              <span className="text-xs text-gray-400 pt-2">Copier la réponse</span>
+              <span className="text-xs pt-2" style={{ opacity: 0.7 }}>Copier la réponse</span>
             </div>
             {item.codeBlocks.length > 0 && (
               <div className="mt-3">

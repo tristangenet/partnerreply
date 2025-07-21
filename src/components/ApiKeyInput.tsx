@@ -12,7 +12,7 @@ export default function ApiKeyInput({ onChange }: { onChange: (key: string) => v
     <div className="mb-4">
       <input
         type="password"
-        className="border px-2 py-1 rounded w-80"
+        className="w-80"
         placeholder="Clé API OpenAI"
         value={value}
         onChange={e => setValue(e.target.value)}
@@ -20,7 +20,7 @@ export default function ApiKeyInput({ onChange }: { onChange: (key: string) => v
       />
       <button
         onClick={handleSave}
-        className="ml-2 bg-gray-900 text-white px-3 py-1 rounded"
+        className="ml-2 primary"
         disabled={!value}
       >
         Sauver
