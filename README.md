@@ -31,3 +31,23 @@ You can preview the built app locally using:
 ```bash
 npm run preview
 ```
+
+## Deploying to Vercel
+
+1. Create an account on [Vercel](https://vercel.com/) if you don't already have one.
+2. Push this repository to GitHub (or another Git provider).
+3. In Vercel, click **New Project** and import the repository.
+4. Keep the default settings. The build command is `npm run build` and the output directory is `dist`.
+5. Once the deployment finishes, note the public URL provided by Vercel.
+
+## Embedding in WordPress
+
+The application can be embedded in a page using an `<iframe>`.
+Add the query parameter `?embed=1` to enable the embed mode which removes the background.
+
+Example snippet to paste in your WordPress page:
+
+```html
+<iframe src="https://your-vercel-app.vercel.app/?embed=1"
+        style="width:100%;height:600px;border:0;" loading="lazy"></iframe>
+```
