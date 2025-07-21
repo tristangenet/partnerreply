@@ -17,7 +17,7 @@ export default function OptionsBar({
     <div className="flex gap-2 mb-4 items-center">
       <button
         onClick={toggleDark}
-        className="border px-2 py-1 rounded flex items-center gap-1"
+        className="secondary flex items-center gap-1"
       >
         {dark ? <Sun size={16} /> : <Moon size={16} />}
         {dark ? "Light" : "Dark"} mode
@@ -25,11 +25,11 @@ export default function OptionsBar({
       <button
         onClick={onReset}
         disabled={loading}
-        className="border px-2 py-1 rounded"
+        className="primary"
       >
         Reset champ
       </button>
-      <button onClick={onClear} className="border px-2 py-1 rounded flex items-center gap-1">
+      <button onClick={onClear} className="primary flex items-center gap-1">
         <Trash2 size={16} /> Effacer historique
       </button>
     </div>

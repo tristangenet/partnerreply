@@ -26,7 +26,7 @@ export default function MessageInput({
         onChange={e => onChange(e.target.value)}
         placeholder="Colle ici le message du partenaire…"
         rows={5}
-        className="border rounded-lg p-3 font-mono text-base"
+        className="font-mono text-base"
         disabled={loading}
       />
       <textarea
@@ -34,7 +34,7 @@ export default function MessageInput({
         onChange={e => onChangeHtml(e.target.value)}
         placeholder="Code HTML (optionnel)"
         rows={3}
-        className="border rounded-lg p-2 font-mono text-sm"
+        className="font-mono text-sm"
         disabled={loading}
       />
       <textarea
@@ -42,7 +42,7 @@ export default function MessageInput({
         onChange={e => onChangeCssjs(e.target.value)}
         placeholder="Code CSS/JS (optionnel)"
         rows={3}
-        className="border rounded-lg p-2 font-mono text-sm"
+        className="font-mono text-sm"
         disabled={loading}
       />
       <input
@@ -54,7 +54,7 @@ export default function MessageInput({
       <button
         onClick={onGenerate}
         disabled={!value || loading}
-        className="bg-black text-white px-6 py-2 rounded-lg font-bold hover:bg-gray-900 transition flex items-center justify-center"
+        className="primary flex items-center justify-center"
       >
         {loading ? (
           <span className="flex items-center gap-2"><span className="loader" />Génération…</span>
