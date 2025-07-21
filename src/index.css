@@ -177,3 +177,17 @@ body.dark .card {
   color: #f4f7fb;
   border-color: #22253b;
 }
+
+/* Embed mode for iframe integration */
+body.embed {
+  background: transparent;
+  min-height: auto;
+}
+
+body.embed::before {
+  display: none;
+}
+
+body.embed .card {
+  margin: 1rem auto;
+}
