@@ -149,7 +149,7 @@ ${message}${htmlPart}${cssPart}`;
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 relative z-10">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 relative z-10">
       <h1 className="text-3xl font-bold mb-6 tracking-tight">PartnerReply</h1>
       <div className={`card${dark ? ' dark' : ''}`}>
         <ApiKeyInput onChange={setApiKey} />
