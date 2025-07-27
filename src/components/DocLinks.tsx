@@ -8,17 +8,20 @@ interface DocLink {
 export default function DocLinks() {
   const [docs, setDocs] = useState<DocLink[]>([]);
   const [customDocs, setCustomDocs] = useState<DocLink[]>([]);
+  const [removedUrls, setRemovedUrls] = useState<string[]>([]);
   const [query, setQuery] = useState("");
   const [newTitle, setNewTitle] = useState("");
   const [newUrl, setNewUrl] = useState("");
 
   const CUSTOM_KEY = "custom_doc_links";
+  const REMOVE_KEY = "removed_doc_links";
 
   useEffect(() => {
     fetch("/docs.json")
       .then(res => res.json())
       .then((data: DocLink[]) => setDocs(data))
       .catch(() => setDocs([]));
+
     const stored = localStorage.getItem(CUSTOM_KEY);
     if (stored) {
       try {
@@ -27,11 +30,25 @@ export default function DocLinks() {
         setCustomDocs([]);
       }
     }
+
+    const removed = localStorage.getItem(REMOVE_KEY);
+    if (removed) {
+      try {
+        setRemovedUrls(JSON.parse(removed));
+      } catch {
+        setRemovedUrls([]);
+      }
+    }
   }, []);
 
   function saveCustom(newDocs: DocLink[]) {
     setCustomDocs(newDocs);
     localStorage.setItem(CUSTOM_KEY, JSON.stringify(newDocs));
+  }
+
+  function saveRemoved(newUrls: string[]) {
+    setRemovedUrls(newUrls);
+    localStorage.setItem(REMOVE_KEY, JSON.stringify(newUrls));
   }
 
   function handleAdd() {
@@ -43,18 +60,30 @@ export default function DocLinks() {
   }
 
   function handleRemove(url: string) {
-    const updated = customDocs.filter(d => d.url !== url);
-    saveCustom(updated);
+    if (customDocs.some(d => d.url === url)) {
+      const updated = customDocs.filter(d => d.url !== url);
+      saveCustom(updated);
+    } else if (!removedUrls.includes(url)) {
+      const updated = [...removedUrls, url];
+      saveRemoved(updated);
+    }
   }
 
   function handleClear() {
     saveCustom([]);
   }
 
+  function handleRestoreDefaults() {
+    saveRemoved([]);
+  }
+
   const allDocs = [...docs, ...customDocs];
+  const visibleDocs = allDocs.filter(d => !removedUrls.includes(d.url));
   const filtered = query
-    ? allDocs.filter(d => d.title.toLowerCase().includes(query.toLowerCase()))
-    : allDocs;
+    ? visibleDocs.filter(d =>
+        d.title.toLowerCase().includes(query.toLowerCase())
+      )
+    : visibleDocs;
 
   return (
     <div className="doc-links card">
@@ -81,15 +110,13 @@ export default function DocLinks() {
             >
               {doc.title}
             </a>
-            {customDocs.some(c => c.url === doc.url) && (
-              <button
-                onClick={() => handleRemove(doc.url)}
-                className="secondary text-xs"
-                title="Supprimer"
-              >
-                ×
-              </button>
-            )}
+            <button
+              onClick={() => handleRemove(doc.url)}
+              className="secondary text-xs"
+              title="Supprimer"
+            >
+              ×
+            </button>
           </li>
         ))}
       </ul>
@@ -115,6 +142,11 @@ export default function DocLinks() {
       {customDocs.length > 0 && (
         <button onClick={handleClear} className="primary text-xs mb-2">
           Réinitialiser liens perso
+        </button>
+      )}
+      {removedUrls.length > 0 && (
+        <button onClick={handleRestoreDefaults} className="primary text-xs mb-2">
+          Réinitialiser liens par défaut
         </button>
       )}
       <p className="text-xs mt-2 opacity-70">

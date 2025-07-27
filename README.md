@@ -65,6 +65,8 @@ search the list, click a title to copy its URL, and add your own links.
    are stored locally in `localStorage` under `custom_doc_links`.
 2. Use the **×** button next to a custom link to remove it.
 3. Click **Réinitialiser liens perso** to clear all custom links.
+4. Default links can also be removed using the **×** button and restored with
+   **Réinitialiser liens par défaut**.
 
 Default links are defined in `public/docs.json` and can be edited to update the
 initial list.
