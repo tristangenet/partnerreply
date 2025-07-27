@@ -55,3 +55,16 @@ Example snippet to paste in your WordPress page:
 <iframe src="https://your-vercel-app.vercel.app/?embed=1"
         style="width:100%;height:600px;border:0;" loading="lazy"></iframe>
 ```
+
+## Managing WiziShop documentation links
+
+The side panel "Liens documentation WiziShop" lists useful articles. You can
+search the list, click a title to copy its URL, and add your own links.
+
+1. Fill in a title and URL below the list then click **Ajouter**. Custom links
+   are stored locally in `localStorage` under `custom_doc_links`.
+2. Use the **×** button next to a custom link to remove it.
+3. Click **Réinitialiser liens perso** to clear all custom links.
+
+Default links are defined in `public/docs.json` and can be edited to update the
+initial list.
