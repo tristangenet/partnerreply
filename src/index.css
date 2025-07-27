@@ -209,3 +209,16 @@ body.embed .card {
   max-width: 38rem;
   width: 100%;
 }
+
+/* Markdown rendering for the generated response */
+.response-markdown {
+  white-space: pre-wrap;
+  text-align: left;
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+.response-markdown ul {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+}

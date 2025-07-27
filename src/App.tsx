@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 import MessageInput from "./components/MessageInput";
 import TagNature from "./components/TagNature";
 import ApiKeyInput from "./components/ApiKeyInput";
@@ -25,6 +26,7 @@ export default function App() {
   const [nature, setNature] = useState<Nature | null>(null);
   const [response, setResponse] = useState("");
   const [codeBlocks, setCodeBlocks] = useState<CodeBlock[]>([]);
+  const textOnly = response.replace(/```([a-zA-Z]*)\n[\s\S]*?```/g, "[Bloc code séparé]");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [history, setHistory] = useState<HistoryItem[]>(() => {
@@ -188,8 +190,8 @@ ${message}${htmlPart}${cssPart}`;
       {response && (
         <div className={`card${dark ? ' dark' : ''}`}>
           {/* Affiche la réponse texte sans les blocs code */}
-          <div className="font-mono text-base whitespace-pre-line">
-            {response.replace(/```([a-zA-Z]*)\n[\s\S]*?```/g, "[Bloc code séparé]")}
+          <div className="response-markdown">
+            <ReactMarkdown>{textOnly}</ReactMarkdown>
           </div>
           <div className="copy-btn">
             <CopyButton value={response} />
