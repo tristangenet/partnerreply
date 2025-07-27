@@ -1,69 +1,57 @@
-# React + TypeScript + Vite
+# PartnerReply
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PartnerReply is a small React + TypeScript application that assists WiziShop support agents in crafting replies. It analyzes a partner's message with OpenAI, classifies the request and produces a concise answer, including any code snippets to copy.
 
-Currently, two official plugins are available:
+Features:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Optional fields to provide HTML, CSS/JS code or an image screenshot.
+- Animated loader while OpenAI generates the answer.
+- Dark and light mode toggle.
+- Recent history of generated replies with ability to clear it.
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+3. When the app is running, enter your OpenAI API key in the field at the top of the page. The key is stored locally in `localStorage` under `openai_api_key`.
+   If no key is found in `localStorage`, the application will also look for
+   an environment variable named `VITE_OPENAI_API_KEY` provided at build time
+   (for example in a `.env` file). This allows deployments to supply the key
+   automatically without user input.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Building for production
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Generate the production assets with:
+```bash
+npm run build
+```
+You can preview the built app locally using:
+```bash
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Deploying to Vercel
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Create an account on [Vercel](https://vercel.com/) if you don't already have one.
+2. Push this repository to GitHub (or another Git provider).
+3. In Vercel, click **New Project** and import the repository.
+4. Keep the default settings. The build command is `npm run build` and the output directory is `dist`.
+5. Once the deployment finishes, note the public URL provided by Vercel.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Embedding in WordPress
+
+The application can be embedded in a page using an `<iframe>`.
+Add the query parameter `?embed=1` to enable the embed mode which removes the background.
+
+Example snippet to paste in your WordPress page:
+
+```html
+<iframe src="https://your-vercel-app.vercel.app/?embed=1"
+        style="width:100%;height:600px;border:0;" loading="lazy"></iframe>
 ```
