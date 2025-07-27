@@ -5,6 +5,7 @@ import ApiKeyInput from "./components/ApiKeyInput";
 import CopyButton from "./components/CopyButton";
 import CodeBlockCard from "./components/CodeBlockCard";
 import HistoryPanel from "./components/HistoryPanel";
+import DocLinks from "./components/DocLinks";
 import OptionsBar from "./components/OptionsBar";
 import { analyzeNature } from "./utils/analyzeNature";
 import { extractCodeBlocks } from "./utils/extractCodeBlocks";
@@ -206,6 +207,7 @@ ${message}${htmlPart}${cssPart}`;
           )}
         </div>
       )}
+      <DocLinks />
       {/* Historique */}
       <HistoryPanel history={history} onRestore={restoreHistory} onClear={clearHistory} />
     </div>
