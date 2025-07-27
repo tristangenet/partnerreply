@@ -2,7 +2,7 @@ body {
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   margin: 0;
   color: #e5e7eb;
-  background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat fixed, #0b1120;
+  background: transparent;
   position: relative;
   min-height: 100vh;
 }
@@ -13,6 +13,7 @@ body::before {
   inset: 0;
   background: rgba(17, 23, 39, 0.85);
   z-index: -1;
+  display: none;
 }
 
 body:not(.dark)::before {
@@ -190,4 +191,21 @@ body.embed::before {
 
 body.embed .card {
   margin: 1rem auto;
+}
+
+/* Center the app vertically and horizontally */
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.app-wrapper {
+  background: #fff;
+  padding: 2rem 1.5rem;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+  max-width: 38rem;
+  width: 100%;
 }
