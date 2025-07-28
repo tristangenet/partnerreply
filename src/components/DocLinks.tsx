@@ -17,7 +17,7 @@ export default function DocLinks() {
   const REMOVE_KEY = "removed_doc_links";
 
   useEffect(() => {
-    fetch("/docs.json")
+    fetch(new URL("../public/docs.json", import.meta.url))
       .then(res => res.json())
       .then((data: DocLink[]) => setDocs(data))
       .catch(() => setDocs([]));
