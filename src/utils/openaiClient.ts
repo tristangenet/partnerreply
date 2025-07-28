@@ -1,9 +1,12 @@
-import { OpenAI } from "openai";
-
-export function getOpenAI(apiKey?: string) {
-  const key = apiKey || import.meta.env.VITE_OPENAI_API_KEY;
-  return new OpenAI({
-    apiKey: key,
-    dangerouslyAllowBrowser: true, // obligatoire côté frontend
+export async function createChatCompletion(body: unknown) {
+  const res = await fetch('/api/openai', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
   });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || 'OpenAI API error');
+  }
+  return res.json();
 }

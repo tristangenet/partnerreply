@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import MessageInput from "./components/MessageInput";
 import TagNature from "./components/TagNature";
-import ApiKeyInput from "./components/ApiKeyInput";
 import CopyButton from "./components/CopyButton";
 import CodeBlockCard from "./components/CodeBlockCard";
 import HistoryPanel from "./components/HistoryPanel";
@@ -10,7 +9,7 @@ import DocLinks from "./components/DocLinks";
 import OptionsBar from "./components/OptionsBar";
 import { analyzeNature } from "./utils/analyzeNature";
 import { extractCodeBlocks } from "./utils/extractCodeBlocks";
-import { getOpenAI } from "./utils/openaiClient";
+import { createChatCompletion } from "./utils/openaiClient";
 import type { Nature } from "./utils/analyzeNature";
 import type { CodeBlock } from "./utils/extractCodeBlocks";
 import type { HistoryItem } from "./components/HistoryPanel";
@@ -18,7 +17,6 @@ import { v4 as uuidv4 } from "uuid";
 import type { ChatCompletionContentPart } from "openai/resources/chat/completions";
 
 export default function App() {
-  const [apiKey, setApiKey] = useState<string>(localStorage.getItem("openai_api_key") || "");
   const [message, setMessage] = useState("");
   const [htmlCode, setHtmlCode] = useState("");
   const [cssjsCode, setCssjsCode] = useState("");
@@ -84,17 +82,13 @@ ${message}${htmlPart}${cssPart}`;
     setNature(n);
 
     try {
-      const finalApiKey = apiKey || import.meta.env.VITE_OPENAI_API_KEY || "";
-      if (!finalApiKey) throw new Error("Aucune clé API OpenAI définie.");
-      const openai = getOpenAI(finalApiKey);
-
       const userContent: ChatCompletionContentPart[] = [
         { type: "text", text: buildPrompt(message, n, htmlCode, cssjsCode) },
       ];
       if (screenshot) {
         userContent.push({ type: "image_url", image_url: { url: screenshot } });
       }
-      const completion = await openai.chat.completions.create({
+      const completion = await createChatCompletion({
         model: "gpt-4o",
         messages: [
           {
@@ -155,7 +149,6 @@ ${message}${htmlPart}${cssPart}`;
     <div className="app-wrapper">
       <h1 className="text-3xl font-bold mb-6 tracking-tight">PartnerReply</h1>
       <div className={`card${dark ? ' dark' : ''}`}>
-        <ApiKeyInput onChange={setApiKey} />
         <OptionsBar
           dark={dark}
           toggleDark={() => setDark(d => !d)}
