@@ -19,11 +19,12 @@ Features:
    ```bash
    npm run dev
    ```
-3. When the app is running, enter your OpenAI API key in the field at the top of the page. The key is stored locally in `localStorage` under `openai_api_key`.
-   If no key is found in `localStorage`, the application will also look for
-   an environment variable named `VITE_OPENAI_API_KEY` provided at build time
-   (for example in a `.env` file). This allows deployments to supply the key
-   automatically without user input.
+3. Start the backend server to proxy requests to OpenAI:
+   ```bash
+   npm start
+   ```
+   The OpenAI API key must be provided in the `OPENAI_API_KEY` environment
+   variable and is **not** stored in the browser anymore.
 
 ## Building for production
 
