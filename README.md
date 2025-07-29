@@ -15,11 +15,12 @@ Features:
    ```bash
    npm install
    ```
-2. Start the development server:
+2. Copy `.env.example` to `.env` and set your `VITE_OPENAI_API_KEY` if you want the key loaded automatically.
+3. Start the development server:
    ```bash
    npm run dev
    ```
-3. When the app is running, enter your OpenAI API key in the field at the top of the page. The key is stored locally in `localStorage` under `openai_api_key`.
+4. When the app is running, enter your OpenAI API key in the field at the top of the page if you didn't provide it via the `.env` file. The key is stored locally in `localStorage` under `openai_api_key`.
    If no key is found in `localStorage`, the application will also look for
    an environment variable named `VITE_OPENAI_API_KEY` provided at build time
    (for example in a `.env` file). This allows deployments to supply the key
